@@ -8,15 +8,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 import mobile.beweb.fondespierre.apprenantstest.DetailapprenantActivity;
+import mobile.beweb.fondespierre.apprenantstest.MainActivity;
 import mobile.beweb.fondespierre.apprenantstest.R;
+import mobile.beweb.fondespierre.apprenantstest.VolleySingleton;
 
 public class ListApprenantAdapter extends ArrayAdapter {
 
@@ -39,13 +50,35 @@ public class ListApprenantAdapter extends ArrayAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-//        Toast.makeText(context, "holaaaaaaaaaaaaaa"+json.length(),
-//                Toast.LENGTH_LONG)
-//                .show();
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final int positiontab = position;
+
+        String url = "https://randomuser.me/api/";
+        RequestQueue queue = VolleySingleton.getInstance(context).getRequestQueue();
+        JsonArrayRequest jsonreq = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+
+                        try {
+                            String picture = response.getJSONObject(0).getJSONArray("results").getJSONObject(4).getString("thumbnail");
+                            Toast.makeText(context,
+                                    picture, Toast.LENGTH_SHORT).show();
+                        } catch (final JSONException e) {
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context,
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(jsonreq);
 
 
         if(convertView == null) {
@@ -79,11 +112,9 @@ public class ListApprenantAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v)
             {
-//                Toast.makeText(context, "holaaaaaaaaaaaaaa",
-//                        Toast.LENGTH_LONG)
-//                        .show();
-                Intent intent = new Intent(getContext(), DetailapprenantActivity.class);
-                getContext().startActivity(intent);
+                Intent intent = new Intent(context, DetailapprenantActivity.class);
+                intent.putExtra("apprenant",json.optJSONObject(positiontab).toString());
+                context.getApplicationContext().startActivity(intent);
             }
         });
 

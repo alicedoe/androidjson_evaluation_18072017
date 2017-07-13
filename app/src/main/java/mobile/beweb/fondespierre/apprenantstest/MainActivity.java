@@ -15,11 +15,9 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import mobile.beweb.fondespierre.apprenantstest.Adapter.ListApprenantAdapter;
 
@@ -33,12 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
-        RequestQueue mRequestQueue;
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
-        Network network = new BasicNetwork(new HurlStack());
-        mRequestQueue = new RequestQueue(cache, network);
-        mRequestQueue.start();
-
+        RequestQueue queue = VolleySingleton.getInstance(this).getRequestQueue();
         JsonArrayRequest jsonreq = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -58,10 +51,6 @@ public class MainActivity extends AppCompatActivity {
                         error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-        mRequestQueue.add(jsonreq);
-
-
-
+        queue.add(jsonreq);
     }
 }
