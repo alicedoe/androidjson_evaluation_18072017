@@ -1,125 +1,104 @@
 package mobile.beweb.fondespierre.apprenantstest.Adapter;
-
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
-
-import mobile.beweb.fondespierre.apprenantstest.DetailapprenantActivity;
 import mobile.beweb.fondespierre.apprenantstest.MainActivity;
 import mobile.beweb.fondespierre.apprenantstest.R;
-import mobile.beweb.fondespierre.apprenantstest.VolleySingleton;
 
-public class ListApprenantAdapter extends ArrayAdapter {
+import static android.support.constraint.R.id.parent;
 
-    private JSONArray json;
-    private Activity context;
-    private String nom;
-    private String prenom;
-    private String skill;
-    private JSONObject apprenant;
+public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdapter.ListApprenantAdapterViewHolder> {
 
-    public ListApprenantAdapter(Activity mainContext, JSONArray mainJson) {
-        super(mainContext, 0);
-        json = mainJson;
-        context = mainContext;
+    private JSONArray apprenantsData;
+    String nom, prenom, skill;
+    private Context context;
+
+    private final ListApprenantAdapterOnClickHandler mClickHandler;
+
+    public ListApprenantAdapter(ListApprenantAdapterOnClickHandler clickHandler){
+        mClickHandler = clickHandler;
     }
 
-    @Override
-    public int getCount() {
-        return json.length();
+    public interface ListApprenantAdapterOnClickHandler {
+        void onClick(JSONObject apprenantDetail);
     }
 
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public class ListApprenantAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        final int positiontab = position;
+        public final TextView mApprenantNomTextView;
+        public final TextView mApprenantPrenomTextView;
+        public final TextView mApprenantSkillTextView;
 
-        String url = "https://randomuser.me/api/";
-        RequestQueue queue = VolleySingleton.getInstance(context).getRequestQueue();
-        JsonArrayRequest jsonreq = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-
-                        try {
-                            String picture = response.getJSONObject(0).getJSONArray("results").getJSONObject(4).getString("thumbnail");
-                            Toast.makeText(context,
-                                    picture, Toast.LENGTH_SHORT).show();
-                        } catch (final JSONException e) {
-
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context,
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        queue.add(jsonreq);
-
-
-        if(convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.listeapprenantitem, parent, false);
+        public ListApprenantAdapterViewHolder(View view) {
+            super(view);
+            mApprenantNomTextView = (TextView) view.findViewById(R.id.laItem_textview_nom);
+            mApprenantPrenomTextView = (TextView) view.findViewById(R.id.laItem_textview_prenom);
+            mApprenantSkillTextView = (TextView) view.findViewById(R.id.laItem_textview_skill);
+            view.setOnClickListener(this);
         }
 
-        try {
-            apprenant = json.getJSONObject(position);
+        @Override
+        public void onClick(View v) {
+            Log.d("click", "toto");
+            int adapterPosition = getAdapterPosition();
+            try {
+                JSONObject apprenantDetails = apprenantsData.getJSONObject(adapterPosition);
+                mClickHandler.onClick(apprenantDetails);
+            } catch(JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-            this.nom = apprenant.getString("nom");
-            this.prenom = apprenant.getString("prenom");
-            this.skill = apprenant.getString("skill");
+    @Override
+    public ListApprenantAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        Context context = viewGroup.getContext();
+        int layoutIdForListItem = R.layout.listeapprenantitem;
+        LayoutInflater inflater = LayoutInflater.from(context);
+        boolean shouldAttachToParentImmediately = false;
+
+        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+        return new ListApprenantAdapterViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ListApprenantAdapterViewHolder listApprenantAdapterViewHolder, int position) {
+        try {
+            JSONObject apprenant;
+            apprenant = apprenantsData.getJSONObject(position);
+
+            nom = apprenant.getString("nom");
+            prenom = apprenant.getString("prenom");
+            skill = apprenant.getString("skill");
 
         } catch (final JSONException e) {
 
         }
 
-        TextView nomT = (TextView) convertView.findViewById(R.id.laItem_textview_nom);
-        nomT.setText(this.nom);
+        listApprenantAdapterViewHolder.mApprenantNomTextView.setText(nom);
+        listApprenantAdapterViewHolder.mApprenantPrenomTextView.setText(prenom);
+        listApprenantAdapterViewHolder.mApprenantSkillTextView.setText(skill);
+    }
 
-        TextView prenomT = (TextView) convertView.findViewById(R.id.laItem_textview_prenom);
-        prenomT.setText(this.prenom);
+    @Override
+    public int getItemCount() {
+        if (null == apprenantsData) return 0;
+        return apprenantsData.length();
+    }
 
-        TextView skillT = (TextView) convertView.findViewById(R.id.laItem_textview_skill);
-        skillT.setText(this.skill);
-
-        ImageButton detail = (ImageButton) convertView.findViewById(R.id.laItem_imagebutton_detail);
-        detail.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(context, DetailapprenantActivity.class);
-                intent.putExtra("apprenant",json.optJSONObject(positiontab).toString());
-                context.getApplicationContext().startActivity(intent);
-            }
-        });
-
-
-        return convertView;
+    public void setWeatherData(JSONArray apprenantsData) {
+        this.apprenantsData = apprenantsData;
+        notifyDataSetChanged();
     }
 
 }

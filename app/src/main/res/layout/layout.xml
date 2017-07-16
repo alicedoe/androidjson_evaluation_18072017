@@ -29,7 +29,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Textspin"
-         />
+        />
 
     <Spinner
         android:id="@+id/la_spinner_session"
@@ -54,16 +54,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Textspin" />
 
-    <ListView
-        android:id="@+id/la_listview_apprenants"
-        android:layout_width="338dp"
-        android:layout_height="372dp"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
-        android:headerDividersEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_liste_apprenant"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/la_spinner_session"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/la_spinner_session" />
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
