@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 public class DetailapprenantActivity extends AppCompatActivity {
 
+    //constructor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

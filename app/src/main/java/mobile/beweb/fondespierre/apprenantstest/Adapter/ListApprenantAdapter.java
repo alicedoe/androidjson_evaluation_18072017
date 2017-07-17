@@ -49,7 +49,6 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
 
         @Override
         public void onClick(View v) {
-            Log.d("click", "toto");
             int adapterPosition = getAdapterPosition();
             try {
                 JSONObject apprenantDetails = apprenantsData.getJSONObject(adapterPosition);
@@ -96,7 +95,7 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
         return apprenantsData.length();
     }
 
-    public void setWeatherData(JSONArray apprenantsData) {
+    public void setApprenantsData(JSONArray apprenantsData) {
         this.apprenantsData = apprenantsData;
         notifyDataSetChanged();
     }

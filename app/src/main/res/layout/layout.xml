@@ -21,10 +21,10 @@
 
     <Spinner
         android:id="@+id/la_spinner_promo"
+        android:spinnerMode="dropdown"
+        android:prompt="@string/prompt_promotion"
         android:layout_width="115dp"
         android:layout_height="50dp"
-        android:spinnerMode="dialog"
-        android:prompt="@string/promo"
         android:background="@android:color/darker_gray"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"

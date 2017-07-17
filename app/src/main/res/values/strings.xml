@@ -3,35 +3,26 @@
     <string name="promo">Promo</string>
     <string name="session">Session</string>
     <string name="skills">Skills</string>
-
-    <string-array name="identity">
-        <item>
-            <nom>Lars1</nom>
-            <prenom>Test1</prenom>
-            <skill>1</skill>
-            <ville>Trifouillis les oies</ville>
-            <description>Super Lars 1 of the world</description>
-        </item>
-        <item>
-            <nom>Lars2</nom>
-            <prenom>Test2</prenom>
-            <skill>3</skill>
-            <ville>Trifouillis les oies</ville>
-            <description>Super Lars 2 of the world</description>
-        </item>
-        <item>
-            <nom>Lars3</nom>
-            <prenom>Test3</prenom>
-            <skill>4</skill>
-            <ville>Trifouillis les oies</ville>
-            <description>Super Lars 3 of the world</description>
-        </item>
-        <item>
-            <nom>Lars4</nom>
-            <prenom>Test4 </prenom>
-            <skill>5</skill>
-            <ville>Trifouillis les oies</ville>
-            <description>Super Lars 4 of the world</description>
-        </item>
+    <string name="prompt_promotion">Promotion</string>
+    <string name="prompt_session">Session</string>
+    <string-array name="promotion">
+        <item>Toutes</item>
+        <item>Béziers</item>
+        <item>Lunel</item>
+    </string-array>
+    <string-array name="session">
+        <item>Toutes</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="skill">
+        <item>Tout</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 </resources>
