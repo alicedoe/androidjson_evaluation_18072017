@@ -1,21 +1,16 @@
 package mobile.beweb.fondespierre.apprenantstest.Adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import mobile.beweb.fondespierre.apprenantstest.MainActivity;
 import mobile.beweb.fondespierre.apprenantstest.R;
-
-import static android.support.constraint.R.id.parent;
 
 public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdapter.ListApprenantAdapterViewHolder> {
 
@@ -25,14 +20,19 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
 
     private final ListApprenantAdapterOnClickHandler mClickHandler;
 
+    //constructor
     public ListApprenantAdapter(ListApprenantAdapterOnClickHandler clickHandler){
         mClickHandler = clickHandler;
     }
 
+    //Interface to handle clickevent in GetJsonApi
     public interface ListApprenantAdapterOnClickHandler {
         void onClick(JSONObject apprenantDetail);
     }
 
+    /**
+     * Cache of the children views for the list
+     */
     public class ListApprenantAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public final TextView mApprenantNomTextView;
@@ -59,6 +59,13 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
         }
     }
 
+    /**
+     * Create enough viewholders to allow scrolling, called when the the RecyclerView is laid out
+     *
+     * @param viewGroup The viewGroup where the viewHolders is
+     * @param viewType  Not used here
+     * @return A new ListApprenantAdapterViewHolder with view for each item
+     */
     @Override
     public ListApprenantAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
@@ -70,6 +77,12 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
         return new ListApprenantAdapterViewHolder(view);
     }
 
+    /**
+     * Bind values to TextViews for each view
+     *
+     * @param listApprenantAdapterViewHolder The list of view
+     * @param position Position in the list to populate with data
+     */
     @Override
     public void onBindViewHolder(ListApprenantAdapterViewHolder listApprenantAdapterViewHolder, int position) {
         try {
@@ -89,12 +102,19 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
         listApprenantAdapterViewHolder.mApprenantSkillTextView.setText(skill);
     }
 
+    /**
+     * @return int the length of the apprenantsData JSONArray
+     */
     @Override
     public int getItemCount() {
         if (null == apprenantsData) return 0;
         return apprenantsData.length();
     }
 
+    /**
+     * Method is called by GetJsonApi when data are fetched from the API
+     * @return notifyDataSetChanged
+     */
     public void setApprenantsData(JSONArray apprenantsData) {
         this.apprenantsData = apprenantsData;
         notifyDataSetChanged();

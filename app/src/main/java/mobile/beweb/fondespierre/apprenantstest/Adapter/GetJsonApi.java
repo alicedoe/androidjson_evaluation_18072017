@@ -35,7 +35,14 @@ public class GetJsonApi implements ListApprenantAdapter.ListApprenantAdapterOnCl
 
     }
 
-    //Using Volley we fetch the json data from the url
+    /**
+     * Create & set the RecyclerView
+     * Volley request to fetch API json
+     *
+     * @param spinnerPromo
+     * @param spinnerSession
+     * @param spinnerSkill
+     */
     public void filterRequest(String spinnerPromo, String spinnerSession, String spinnerSkill) {
         //Spinner item are sent to sort the data
         final String promo = spinnerPromo;
@@ -86,8 +93,17 @@ public class GetJsonApi implements ListApprenantAdapter.ListApprenantAdapterOnCl
         context.getApplicationContext().startActivity(intent);
     }
 
-    //method to sort data
 
+    /**
+     *
+     *Using parameters from spinners this method is used to sorted data
+     *
+     * @param response JSONArray with data from api
+     * @param spinnerPromo Item selected from spinnerpromo
+     * @param spinnerSession Item selected from spinnersession
+     * @param spinnerSkill Item selected from spinnerskill
+     * @return JSONArray response containing the data filtered
+     */
     public JSONArray sortArray(JSONArray response, String spinnerPromo, String spinnerSession, String spinnerSkill) {
 
         //sort for promo

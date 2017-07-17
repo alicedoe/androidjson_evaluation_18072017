@@ -34,8 +34,10 @@ public class DetailapprenantActivity extends AppCompatActivity {
         TextView descriptionT = (TextView) findViewById(R.id.da_textview_description);
         RatingBar ratingbarT = (RatingBar) findViewById(R.id.da_ratingbar);
 
+        //Fetch string passing from the previous activity containing the apprenant details
         String apprenant  = getIntent().getExtras().getString("apprenant");
 
+        //Insert data from JSONObject in the views
         try {
 
             aprennantJson = new JSONObject(apprenant);
@@ -51,6 +53,7 @@ public class DetailapprenantActivity extends AppCompatActivity {
                     .show();
         }
 
+        //Fetch from another API a random picture just for fun
         String url = "https://randomuser.me/api/";
         RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -82,6 +85,7 @@ public class DetailapprenantActivity extends AppCompatActivity {
         });
         queue.add(jsonObjReq);
 
+        //Button to go back in listApprenant Activity
         Button retour = (Button) findViewById(R.id.da_button_retour);
         retour.setOnClickListener(new View.OnClickListener()
         {

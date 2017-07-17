@@ -14,11 +14,23 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
     private String url;
     private ImageView imageView;
 
+    /**
+     * Constructor
+     *
+     * @param url where we want to pick the picture
+     * @param imageView where we want to put the picture
+     */
     public ImageLoadTask(String url, ImageView imageView) {
         this.url = url;
         this.imageView = imageView;
     }
 
+    /**
+     * Using HttpURLConnection we download the picture and convert it i Bitmap
+     *
+     * @param params
+     * @return
+     */
     @Override
     protected Bitmap doInBackground(Void... params) {
         try {
@@ -36,6 +48,11 @@ public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
         return null;
     }
 
+    /**
+     * Method is called when doInBackground is done
+     *
+     * @param result from previous resquest
+     */
     @Override
     protected void onPostExecute(Bitmap result) {
         super.onPostExecute(result);

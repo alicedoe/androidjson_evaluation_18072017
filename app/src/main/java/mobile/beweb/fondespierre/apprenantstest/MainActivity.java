@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
-        Toast.makeText(this, "Pop", Toast.LENGTH_SHORT).show();
     }
 
 }
