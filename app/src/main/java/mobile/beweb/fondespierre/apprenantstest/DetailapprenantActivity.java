@@ -1,11 +1,9 @@
 package mobile.beweb.fondespierre.apprenantstest;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -33,6 +31,7 @@ public class DetailapprenantActivity extends AppCompatActivity {
         TextView villeT = (TextView) findViewById(R.id.da_textview_ville);
         TextView descriptionT = (TextView) findViewById(R.id.da_textview_description);
         RatingBar ratingbarT = (RatingBar) findViewById(R.id.da_ratingbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Fetch string passing from the previous activity containing the apprenant details
         String apprenant  = getIntent().getExtras().getString("apprenant");
@@ -85,16 +84,15 @@ public class DetailapprenantActivity extends AppCompatActivity {
         });
         queue.add(jsonObjReq);
 
-        //Button to go back in listApprenant Activity
-        Button retour = (Button) findViewById(R.id.da_button_retour);
-        retour.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                getApplicationContext().startActivity(intent);
-            }
-        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

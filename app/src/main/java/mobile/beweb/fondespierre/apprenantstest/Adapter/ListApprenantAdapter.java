@@ -1,22 +1,34 @@
 package mobile.beweb.fondespierre.apprenantstest.Adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import mobile.beweb.fondespierre.apprenantstest.ImageLoadTask;
 import mobile.beweb.fondespierre.apprenantstest.R;
+import mobile.beweb.fondespierre.apprenantstest.VolleySingleton;
 
 public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdapter.ListApprenantAdapterViewHolder> {
 
     private JSONArray apprenantsData;
-    String nom, prenom, skill;
+    String nom, prenom, ville;
     private Context context;
+    View view;
 
     private final ListApprenantAdapterOnClickHandler mClickHandler;
 
@@ -37,13 +49,15 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
 
         public final TextView mApprenantNomTextView;
         public final TextView mApprenantPrenomTextView;
-        public final TextView mApprenantSkillTextView;
+        public final TextView mApprenantVilleTextView;
+        public final ImageView mApprenantImageView;
 
         public ListApprenantAdapterViewHolder(View view) {
             super(view);
             mApprenantNomTextView = (TextView) view.findViewById(R.id.laItem_textview_nom);
             mApprenantPrenomTextView = (TextView) view.findViewById(R.id.laItem_textview_prenom);
-            mApprenantSkillTextView = (TextView) view.findViewById(R.id.laItem_textview_skill);
+            mApprenantVilleTextView = (TextView) view.findViewById(R.id.laItem_textview_ville);
+            mApprenantImageView = (ImageView) view.findViewById(R.id.laItem_imagebutton_detail);
             view.setOnClickListener(this);
         }
 
@@ -85,21 +99,21 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
      */
     @Override
     public void onBindViewHolder(ListApprenantAdapterViewHolder listApprenantAdapterViewHolder, int position) {
+
         try {
             JSONObject apprenant;
             apprenant = apprenantsData.getJSONObject(position);
 
             nom = apprenant.getString("nom");
             prenom = apprenant.getString("prenom");
-            skill = apprenant.getString("skill");
+            ville = apprenant.getString("ville");
 
         } catch (final JSONException e) {
 
         }
-
         listApprenantAdapterViewHolder.mApprenantNomTextView.setText(nom);
         listApprenantAdapterViewHolder.mApprenantPrenomTextView.setText(prenom);
-        listApprenantAdapterViewHolder.mApprenantSkillTextView.setText(skill);
+        listApprenantAdapterViewHolder.mApprenantVilleTextView.setText(ville);
     }
 
     /**

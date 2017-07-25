@@ -1,51 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        card_view:cardElevation="5dp"
+        card_view:cardUseCompatPadding="true">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/laItem_textview_nom"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:layout_marginTop="32dp"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/laItem_imagebutton_detail"
-        app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:layout_width="180dp"
+                android:layout_height="1px"
+                android:layout_marginTop="50dp"
+                android:background="@android:color/darker_gray"
+                android:layout_alignLeft="@+id/laItem_textview_nom"/>
 
-    <TextView
-        android:id="@+id/laItem_textview_prenom"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/laItem_imagebutton_detail"
-        app:layout_constraintTop_toBottomOf="@+id/laItem_textview_nom"
-        app:layout_constraintHorizontal_bias="0.1" />
+            <ImageButton
+                android:id="@+id/laItem_imagebutton_detail"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@android:drawable/ic_menu_view" />
 
-    <TextView
-        android:id="@+id/laItem_textview_skill"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:layout_marginTop="0dp"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/laItem_imagebutton_detail"
-        app:layout_constraintTop_toBottomOf="@+id/laItem_textview_prenom"
-        app:layout_constraintHorizontal_bias="0.1" />
+            <TextView
+                android:id="@+id/laItem_textview_nom"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/laItem_imagebutton_detail"
+                android:layout_toRightOf="@+id/laItem_imagebutton_detail"
+                android:text="Nom"
+                android:textColor="@android:color/darker_gray" />
 
-    <ImageButton
-        android:id="@+id/laItem_imagebutton_detail"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_view" />
+            <TextView
+                android:id="@+id/laItem_textview_prenom"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_alignBaseline="@+id/laItem_textview_nom"
+                android:layout_alignBottom="@+id/laItem_textview_nom"
+                android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp"
+                android:layout_toEndOf="@+id/laItem_textview_nom"
+                android:layout_toRightOf="@+id/laItem_textview_nom"
+                android:text="Prenom"
+                android:textColor="@android:color/darker_gray" />
 
-</android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/laItem_textview_ville"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_alignBottom="@+id/laItem_imagebutton_detail"
+                android:layout_marginBottom="20dp"
+                android:text="Ville"
+                android:textColor="@android:color/darker_gray"
+                android:layout_alignLeft="@+id/laItem_textview_nom"
+                android:layout_alignStart="@+id/laItem_textview_nom" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
