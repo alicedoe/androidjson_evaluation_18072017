@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ListPreference
+        android:defaultValue="@string/filter_town_key_all"
+        android:entries="@array/ville_filters_label"
+        android:entryValues="@array/ville_filters_key"
+        android:key="@string/filter_town_label"
+        android:title="@string/filter_town_title" />
+
+    <ListPreference
+        android:defaultValue="@string/filter_promo_key_all"
+        android:entries="@array/promo_filters_label"
+        android:entryValues="@array/promo_filters_key"
+        android:key="@string/filter_promo_label"
+        android:title="@string/filter_promo_title" />
+
+    <ListPreference
+        android:defaultValue="@string/filter_skill_key_all"
+        android:entries="@array/skill_filters_label"
+        android:entryValues="@array/skill_filters_key"
+        android:key="@string/filter_skill_label"
+        android:title="@string/filter_skill_title" />
+</PreferenceScreen>

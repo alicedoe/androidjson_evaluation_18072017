@@ -5,6 +5,47 @@
     <string name="skills">Skills</string>
     <string name="prompt_promotion">Promotion</string>
     <string name="prompt_session">Session</string>
+    <string name="filters">Filtres</string>
+    <string name="reset_filters">Annuler les filtres</string>
+
+    <!--Filtre Ville-->
+    <string name="filter_town_label">Ville</string>
+    <string name="filter_town_title" translatable="false">Filtrer par ville</string>
+    <string name="filter_town_label_lunel">Lunel</string>
+    <string name="filter_town_key_lunel" translatable="false">lunel</string>
+    <string name="filter_town_label_all">Toutes</string>
+    <string name="filter_town_key_all" translatable="false">toutes</string>
+    <!-- Value in SharedPreferences for metric temperature unit option [CHAR LIMIT=NONE] -->
+    <string name="filter_town_label_beziers" translatable="false">Béziers</string>
+    <!-- Value in SharedPreferences for imperial temperature unit option [CHAR LIMIT=NONE] -->
+    <string name="filter_town_key_beziers" translatable="false">beziers</string>
+
+    <!--Filtre Promo-->
+    <string name="filter_promo_label">Promotion</string>
+    <string name="filter_promo_title" translatable="false">Filtrer par promotion</string>
+    <string name="filter_promo_label_2017">Promo 2017</string>
+    <string name="filter_promo_key_2017" translatable="false">2017</string>
+    <string name="filter_promo_label_2016">Promo 2016</string>
+    <string name="filter_promo_key_2016" translatable="false">2016</string>
+    <string name="filter_promo_label_all">Toutes</string>
+    <string name="filter_promo_key_all" translatable="false">toutes</string>
+
+    <!--Filtre Skills-->
+    <string name="filter_skill_label">Skill</string>
+    <string name="filter_skill_title" translatable="false">Filtrer par skill</string>
+    <string name="filter_skill_label_1">Niveau 1</string>
+    <string name="filter_skill_key_1" translatable="false">niveau1</string>
+    <string name="filter_skill_label_2">Niveau 2</string>
+    <string name="filter_skill_key_2" translatable="false">niveau2</string>
+    <string name="filter_skill_label_3">Niveau 3</string>
+    <string name="filter_skill_key_3" translatable="false">niveau3</string>
+    <string name="filter_skill_label_4">Niveau 4</string>
+    <string name="filter_skill_key_4" translatable="false">niveau4</string>
+    <string name="filter_skill_label_5">Niveau 5</string>
+    <string name="filter_skill_key_5" translatable="false">niveau5</string>
+    <string name="filter_skill_label_all">Tous</string>
+    <string name="filter_skill_key_all" translatable="false">tous</string>
+
     <string-array name="promotion">
         <item>Toutes</item>
         <item>Béziers</item>

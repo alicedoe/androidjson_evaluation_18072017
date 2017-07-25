@@ -106,7 +106,8 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
         listApprenantAdapterViewHolder.mApprenantPrenomTextView.setText(prenom);
         listApprenantAdapterViewHolder.mApprenantVilleTextView.setText(ville);
 
-        ImageView pictureView = (ImageView) view.findViewById(R.id.da_imageView);
+
+        ImageView pictureView = listApprenantAdapterViewHolder.mApprenantImageView;
         new ImageLoadApi(context, pictureView);
     }
 

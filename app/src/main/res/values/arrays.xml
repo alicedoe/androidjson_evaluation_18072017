@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ville_filters_key">
+        <item>@string/filter_town_key_beziers</item>
+        <item>@string/filter_town_key_lunel</item>
+        <item>@string/filter_town_key_all</item>
+    </string-array>
+
+    <string-array name="ville_filters_label">
+        <item>@string/filter_town_label_beziers</item>
+        <item>@string/filter_town_label_lunel</item>
+        <item>@string/filter_town_label_all</item>
+    </string-array>
+
+    <string-array name="promo_filters_key">
+        <item>@string/filter_promo_key_2016</item>
+        <item>@string/filter_promo_key_2017</item>
+        <item>@string/filter_promo_key_all</item>
+    </string-array>
+
+    <string-array name="promo_filters_label">
+        <item>@string/filter_promo_label_2016</item>
+        <item>@string/filter_promo_label_2017</item>
+        <item>@string/filter_promo_label_all</item>
+    </string-array>
+
+    <string-array name="skill_filters_key">
+        <item>@string/filter_skill_key_1</item>
+        <item>@string/filter_skill_key_2</item>
+        <item>@string/filter_skill_key_3</item>
+        <item>@string/filter_skill_key_4</item>
+        <item>@string/filter_skill_key_5</item>
+        <item>@string/filter_skill_key_all</item>
+    </string-array>
+
+    <string-array name="skill_filters_label">
+        <item>@string/filter_skill_label_1</item>
+        <item>@string/filter_skill_label_2</item>
+        <item>@string/filter_skill_label_3</item>
+        <item>@string/filter_skill_label_4</item>
+        <item>@string/filter_skill_label_5</item>
+        <item>@string/filter_skill_label_all</item>
+    </string-array>
+</resources>
