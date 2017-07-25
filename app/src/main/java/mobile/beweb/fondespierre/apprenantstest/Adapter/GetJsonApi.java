@@ -64,7 +64,7 @@ public class GetJsonApi implements ListApprenantAdapter.ListApprenantAdapterOnCl
 
         //Volley request create a queue with the request from the url
         RequestQueue queue = VolleySingleton.getInstance(context).getRequestQueue();
-        JsonArrayRequest jsonreq = new JsonArrayRequest("http://10.216.0.138/apiBlackBooks",
+        JsonArrayRequest jsonreq = new JsonArrayRequest("http://900grammes.fr/api/",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {

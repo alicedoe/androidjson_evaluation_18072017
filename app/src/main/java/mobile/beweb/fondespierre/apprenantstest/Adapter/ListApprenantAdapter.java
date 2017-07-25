@@ -1,27 +1,18 @@
 package mobile.beweb.fondespierre.apprenantstest.Adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import mobile.beweb.fondespierre.apprenantstest.ImageLoadTask;
+import mobile.beweb.fondespierre.apprenantstest.ImageLoadApi;
 import mobile.beweb.fondespierre.apprenantstest.R;
-import mobile.beweb.fondespierre.apprenantstest.VolleySingleton;
 
 public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdapter.ListApprenantAdapterViewHolder> {
 
@@ -114,6 +105,9 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
         listApprenantAdapterViewHolder.mApprenantNomTextView.setText(nom);
         listApprenantAdapterViewHolder.mApprenantPrenomTextView.setText(prenom);
         listApprenantAdapterViewHolder.mApprenantVilleTextView.setText(ville);
+
+        ImageView pictureView = (ImageView) view.findViewById(R.id.da_imageView);
+        new ImageLoadApi(context, pictureView);
     }
 
     /**

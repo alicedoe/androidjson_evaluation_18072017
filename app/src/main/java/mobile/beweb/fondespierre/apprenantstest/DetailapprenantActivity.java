@@ -53,36 +53,8 @@ public class DetailapprenantActivity extends AppCompatActivity {
         }
 
         //Fetch from another API a random picture just for fun
-        String url = "https://randomuser.me/api/";
-        RequestQueue queue = VolleySingleton.getInstance(getApplicationContext()).getRequestQueue();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("data", response.toString());
-
-
-                        try {
-                            String picture = response.getJSONArray("results")
-                                    .getJSONObject(0)
-                                    .getJSONObject("picture")
-                                    .getString("thumbnail");
-                            ImageView pictureView = (ImageView) findViewById(R.id.da_imageView);
-                            new ImageLoadTask(picture, pictureView).execute();
-                        } catch (final JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        queue.add(jsonObjReq);
+        ImageView pictureView = (ImageView) findViewById(R.id.da_imageView);
+        new ImageLoadApi(this, pictureView);
 
     }
 
