@@ -29,6 +29,12 @@ public class SettingsFragments extends PreferenceFragmentCompat implements Share
         }
     }
 
+    private PreferenceScreen getPreference() {
+        SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
+        PreferenceScreen prefScreen = getPreferenceScreen();
+        return prefScreen;
+    }
+
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         /* Add 'general' preferences, defined in the XML file */
@@ -40,8 +46,6 @@ public class SettingsFragments extends PreferenceFragmentCompat implements Share
             Preference p = prefScreen.getPreference(i);
             String value = sharedPreferences.getString(p.getKey(), "");
             setPreferenceSummary(p, value);
-            Log.d("p : ",p.toString());
-            Log.d("value : ",value.toString());
         }
     }
 

@@ -1,23 +1,28 @@
 package mobile.beweb.fondespierre.apprenantstest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.TextView;
 
-import mobile.beweb.fondespierre.apprenantstest.Adapter.GetJsonApi;
+import mobile.beweb.fondespierre.apprenantstest.data.GetJsonApi;
+import mobile.beweb.fondespierre.apprenantstest.data.Preferences;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    //In the MainActivity we initialize and create the RecyclerView and the 3 spinners
-    //Set adapter on each Spinner and attach a listener to check when items are selected
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+    //In the MainActivity we initialize and create the RecyclerView & Textview who are displaying the preferences filters
     RecyclerView mRecyclerView;
+    TextView mTextViewTown;
+    TextView mTextViewSkill;
+    TextView mTextViewPromo;
+    //boolean to check if pref have been updated and so refresh data
+    private static boolean PREFERENCES_HAVE_BEEN_UPDATED = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,49 +31,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_liste_apprenant);
 
-        Spinner spinnerPromo = (Spinner) findViewById(R.id.la_spinner_promo);
-        ArrayAdapter<CharSequence> adapterSpinnerPromo = ArrayAdapter.createFromResource(this,
-                R.array.promotion, android.R.layout.simple_spinner_item);
-        adapterSpinnerPromo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPromo.setAdapter(adapterSpinnerPromo);
+        //Textview to display pref filters
+        mTextViewTown = (TextView) findViewById(R.id.la_filtre_ville_value);
+        mTextViewSkill = (TextView) findViewById(R.id.la_filtre_skill_value);
+        mTextViewPromo = (TextView) findViewById(R.id.la_filtre_promotion_value);
 
-        Spinner spinnerSession = (Spinner) findViewById(R.id.la_spinner_session);
-        ArrayAdapter<CharSequence> adapterSpinnerSession = ArrayAdapter.createFromResource(this,
-                R.array.session, android.R.layout.simple_spinner_item);
-        adapterSpinnerSession.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSession.setAdapter(adapterSpinnerSession);
+        //Get the filters prefs display them in TextView and Called filterRequest in GetJsonAPI
+        // to make the volley request and fill the RecyclerView
+        String[] pref = getPref();
+        mTextViewTown.setText(pref[0]);
+        mTextViewSkill.setText(pref[2]);
+        mTextViewPromo.setText(pref[1]);
+        new GetJsonApi(this, mRecyclerView).filterRequest(pref[1],pref[0],pref[2]);
 
-        Spinner spinnerSkill = (Spinner) findViewById(R.id.la_spinner_skills);
-        ArrayAdapter<CharSequence> adapterSpinnerSkill = ArrayAdapter.createFromResource(this,
-                R.array.skill, android.R.layout.simple_spinner_item);
-        adapterSpinnerSkill.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSkill.setAdapter(adapterSpinnerSession);
-
-        spinnerPromo.setOnItemSelectedListener(this);
-        spinnerSession.setOnItemSelectedListener(this);
-        spinnerSkill.setOnItemSelectedListener(this);
-
-        //Called filterRequest in GetJsonAPI to make the volley request and fill the RecyclerView
-        new GetJsonApi(this, mRecyclerView).filterRequest("Toutes","Toutes","Tout");
-
-    }
-
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        //When a filter is set in a spinner we get selected item on each spinner and called filterRequest in
-        //GetJsonAPI with items selected
-        Spinner spinnerPromo = (Spinner) findViewById(R.id.la_spinner_promo);
-        String choixSpinnerPromo = spinnerPromo.getSelectedItem().toString();
-        Spinner spinnerSession = (Spinner) findViewById(R.id.la_spinner_session);
-        String choixSpinnerSession = spinnerSession.getSelectedItem().toString();
-        Spinner spinnerSkill = (Spinner) findViewById(R.id.la_spinner_skills);
-        String choixSpinnerSkill = spinnerSkill.getSelectedItem().toString();
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_liste_apprenant);
-        new GetJsonApi(this, mRecyclerView).filterRequest(choixSpinnerPromo,choixSpinnerSession,choixSpinnerSkill);
-
-    }
-
-    public void onNothingSelected(AdapterView<?> parent) {
+        //Register the changelistener to receive a callback if preference has been updated
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
@@ -83,15 +61,66 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //Catch the id of the menu item selected
         int id = item.getItemId();
 
+        //if we select filters activity filters is launched
         if (id == R.id.filters) {
             Intent startFiltersActivity = new Intent(this, Filtres.class);
             startActivity(startFiltersActivity);
+            return true;
+        }
+        //if we select reset_filters all filters are reset data are refresh
+        else if (id == R.id.reset_filters) {
+            new Preferences().resetFilters(this);
+            String[] pref = getPref();
+            mTextViewTown.setText(pref[0]);
+            mTextViewSkill.setText(pref[2]);
+            mTextViewPromo.setText(pref[1]);
+            new GetJsonApi(this, mRecyclerView).filterRequest("toutes","toutes","tous");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    //when we come back to mainActivity we getPref and update data
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (PREFERENCES_HAVE_BEEN_UPDATED) {
+            String[] pref = getPref();
+            mTextViewTown.setText(pref[0]);
+            mTextViewSkill.setText(pref[2]);
+            mTextViewPromo.setText(pref[1]);
+            PREFERENCES_HAVE_BEEN_UPDATED = false;
+            new GetJsonApi(this, mRecyclerView).filterRequest(pref[1],pref[0],pref[2]);
+        }
+    }
+
+    //Get each pref of each filter and return
+    public String[] getPref() {
+        String[] pref = new String[3];
+        pref[0] = new Preferences().getTownFilter(this);
+        pref[1] = new Preferences().getPromoFilter(this);
+        pref[2] = new Preferences().getSkillFilter(this);
+        return pref;
+    }
+
+    // COMPLETED (8) Override onDestroy and unregister MainActivity as a SharedPreferenceChangedListener
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        /* Unregister MainActivity as an OnPreferenceChangedListener to avoid any memory leaks. */
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+        PREFERENCES_HAVE_BEEN_UPDATED = true;
+
+    }
 }
