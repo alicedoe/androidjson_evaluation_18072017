@@ -3,14 +3,8 @@ package mobile.beweb.fondespierre.apprenantstest.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
-import android.util.Log;
 
 import mobile.beweb.fondespierre.apprenantstest.R;
-
-/**
- * Created by Aliiiiiiii on 26/07/2017.
- */
 
 public class Preferences {
 

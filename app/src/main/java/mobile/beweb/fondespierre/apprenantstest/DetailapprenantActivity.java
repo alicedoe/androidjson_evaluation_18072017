@@ -1,5 +1,9 @@
 package mobile.beweb.fondespierre.apprenantstest;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +33,7 @@ public class DetailapprenantActivity extends AppCompatActivity {
         TextView nomT = (TextView) findViewById(R.id.da_textview_nom);
         TextView prenomT = (TextView) findViewById(R.id.da_textview_prenom);
         TextView villeT = (TextView) findViewById(R.id.da_textview_ville);
+        TextView promoT = (TextView) findViewById(R.id.da_textview_promo);
         TextView descriptionT = (TextView) findViewById(R.id.da_textview_description);
         RatingBar ratingbarT = (RatingBar) findViewById(R.id.da_ratingbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -43,6 +48,7 @@ public class DetailapprenantActivity extends AppCompatActivity {
             nomT.setText(aprennantJson.getString("nom"));
             prenomT.setText(aprennantJson.getString("prenom"));
             villeT.setText(aprennantJson.getString("ville"));
+            promoT.setText("Promotion "+aprennantJson.getString("promotion"));
             descriptionT.setText(aprennantJson.getString("description"));
             ratingbarT.setRating(aprennantJson.getInt("skill"));
 
@@ -52,9 +58,15 @@ public class DetailapprenantActivity extends AppCompatActivity {
                     .show();
         }
 
+        ImageView imageView = (ImageView)findViewById(R.id.da_imageView);
+        Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.icon_profil);
+        RoundedBitmapDrawable roundDrawable = RoundedBitmapDrawableFactory.create(getResources(), avatar);
+        roundDrawable.setCircular(true);
+        imageView.setImageDrawable(roundDrawable);
+
         //Fetch from another API a random picture just for fun
-        ImageView pictureView = (ImageView) findViewById(R.id.da_imageView);
-        new ImageLoadApi(this, pictureView);
+//        ImageView pictureView = (ImageView) findViewById(R.id.da_imageView);
+//        pictureView.setImageDrawable(getDrawable(R.drawable.ano));
 
     }
 

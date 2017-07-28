@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import mobile.beweb.fondespierre.apprenantstest.data.GetJsonApi;
 import mobile.beweb.fondespierre.apprenantstest.data.Preferences;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         mTextViewPromo = (TextView) findViewById(R.id.la_filtre_promotion_value);
 
         //Get the filters prefs display them in TextView and Called filterRequest in GetJsonAPI
-        // to make the volley request and fill the RecyclerView
+        //to make the volley request and fill the RecyclerView
         String[] pref = getPref();
         mTextViewTown.setText(pref[0]);
         mTextViewSkill.setText(pref[2]);
@@ -119,8 +120,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
         PREFERENCES_HAVE_BEEN_UPDATED = true;
-
     }
 }

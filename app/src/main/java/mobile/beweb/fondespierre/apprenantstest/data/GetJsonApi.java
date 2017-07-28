@@ -74,7 +74,6 @@ public class GetJsonApi implements ListApprenantAdapter.ListApprenantAdapterOnCl
                         //response came back with all data and is sent to the adapter
                         response = sortArray(response, promo, town, skill);
                         listeApprenantAdapter.setApprenantsData(response);
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -108,7 +107,6 @@ public class GetJsonApi implements ListApprenantAdapter.ListApprenantAdapterOnCl
      * @return JSONArray response containing the data filtered
      */
     public JSONArray sortArray(JSONArray response, String spinnerPromo, String spinnerTown, String spinnerSkill) {
-        Log.d("responsedébut", response.toString());
         //sort for promo
         if(!spinnerPromo.equals("toutes")){
             JSONArray filterTab = new JSONArray();
@@ -152,7 +150,6 @@ public class GetJsonApi implements ListApprenantAdapter.ListApprenantAdapterOnCl
             //result stock in response JSONArray
             response = filterTab;
         }
-        Log.d("responseaprèstown", response.toString());
         //sort for skill
         if(!spinnerSkill.equals("tous")){
             JSONArray filterTab = new JSONArray();
@@ -175,7 +172,7 @@ public class GetJsonApi implements ListApprenantAdapter.ListApprenantAdapterOnCl
             //result stock in response JSONArray
             response = filterTab;
         }
-        Toast.makeText(context, String.valueOf(response.length()),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Nombre d'apprenants : "+String.valueOf(response.length()),Toast.LENGTH_SHORT).show();
 
         return response;
     }

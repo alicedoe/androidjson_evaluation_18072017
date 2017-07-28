@@ -1,90 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greyBackgroundLight">
+    android:orientation="vertical"
+    android:background="@color/da_ratingBarFullText">
 
-    <TextView
-        android:id="@+id/la_filtre_ville_label"
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/filter_town_label"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="40dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:background="@color/da_bleu4"
+        android:minHeight="50dp"
+        android:padding="5dp"
+        android:columnCount="3"
+        >
 
-    <TextView
-        android:id="@+id/la_filtre_promotion_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/filter_promo_label"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@+id/la_filtre_ville_label"
-        app:layout_constraintRight_toLeftOf="@+id/la_filtre_skill_label" />
+        <TextView
+            android:id="@+id/la_filtre_ville_label"
+            android:text="@string/filter_town_label"
+            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:layout_gravity="fill_horizontal" />
 
-    <TextView
-        android:id="@+id/la_filtre_skill_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/filter_skill_label"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="40dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/la_filtre_promotion_label"
+            android:text="@string/filter_promo_label"
+            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:layout_gravity="fill_horizontal" />
 
-    <TextView
-        android:id="@+id/la_filtre_promotion_value"
-        android:layout_alignLeft="@+id/la_filtre_promotion_label"
-        android:layout_alignRight="@+id/la_filtre_promotion_label"
-        android:layout_below="@+id/la_filtre_promotion_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/filter_promo_label"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@+id/la_filtre_promotion_label"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerview_liste_apprenant"
-        app:layout_constraintRight_toRightOf="@+id/la_filtre_promotion_label"
-        app:layout_constraintLeft_toLeftOf="@+id/la_filtre_promotion_label" />
+        <TextView
+            android:id="@+id/la_filtre_skill_label"
+            android:text="@string/filter_skill_label"
+            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:layout_gravity="fill_horizontal" />
 
-    <TextView
-        android:id="@+id/la_filtre_ville_value"
-        android:gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/filter_town_label"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@+id/la_filtre_ville_label"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerview_liste_apprenant"
-        app:layout_constraintRight_toRightOf="@+id/la_filtre_ville_label"
-        app:layout_constraintLeft_toLeftOf="@+id/la_filtre_ville_label" />
+        <TextView
+            android:id="@+id/la_filtre_promotion_value"
+            android:text="@string/filter_promo_label"
+            android:textColor="@android:color/darker_gray"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:layout_gravity="fill_horizontal"/>
 
-    <TextView
-        android:id="@+id/la_filtre_skill_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/filter_skill_label"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@+id/la_filtre_skill_label"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerview_liste_apprenant"
-        app:layout_constraintRight_toRightOf="@+id/la_filtre_skill_label"
-        app:layout_constraintLeft_toLeftOf="@+id/la_filtre_skill_label" />
+        <TextView
+            android:id="@+id/la_filtre_ville_value"
+            android:text="@string/filter_town_label"
+            android:textColor="@android:color/darker_gray"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:layout_gravity="fill_horizontal"/>
+
+        <TextView
+            android:id="@+id/la_filtre_skill_value"
+            android:text="@string/filter_skill_label"
+            android:textColor="@android:color/darker_gray"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:layout_gravity="fill_horizontal"/>
+
+    </GridLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_liste_apprenant"
         android:layout_width="match_parent"
-        android:layout_height="453dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="0dp" />
+        android:layout_height="match_parent" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

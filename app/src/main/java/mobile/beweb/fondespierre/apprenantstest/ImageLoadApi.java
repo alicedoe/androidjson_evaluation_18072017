@@ -38,7 +38,7 @@ public class ImageLoadApi {
                     String picture = response.getJSONArray("results")
                             .getJSONObject(0)
                             .getJSONObject("picture")
-                            .getString("medium");
+                            .getString("large");
                     new ImageLoadTask(picture, pictureViewToFill).execute();
                 } catch (final JSONException e) {
                     e.printStackTrace();

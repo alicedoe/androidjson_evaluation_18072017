@@ -1,11 +1,14 @@
 package mobile.beweb.fondespierre.apprenantstest.Adapter;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,9 +109,8 @@ public class ListApprenantAdapter extends RecyclerView.Adapter<ListApprenantAdap
         listApprenantAdapterViewHolder.mApprenantPrenomTextView.setText(prenom);
         listApprenantAdapterViewHolder.mApprenantVilleTextView.setText(ville);
 
-
-        ImageView pictureView = listApprenantAdapterViewHolder.mApprenantImageView;
-        new ImageLoadApi(context, pictureView);
+//        ImageView pictureView = listApprenantAdapterViewHolder.mApprenantImageView;
+//        new ImageLoadApi(context, pictureView);
     }
 
     /**
